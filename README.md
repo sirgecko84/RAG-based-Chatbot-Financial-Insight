@@ -35,7 +35,7 @@ Khi người dùng đặt câu hỏi, mô hình sẽ thực hiện chuyển câu
 ```bash
 pip install -r requirements.txt
 ```
-## Creaate database
+## Create database
 ```bash
 python .\populate_database.py
 ```
