@@ -3,6 +3,8 @@
 
 Chatbot trả lời các câu hỏi về Báo cáo tài chính của công ty Sun Asterisk dựa vào dữ liệu được cung cấp. Dữ liệu cung cấp cho mô hình có thể được thêm hoặc sửa đổi để cập nhập những thông tin mới nhất về tình hình tài chính của công ty.
 
+## Video giới thiệu sản phẩm
+https://drive.google.com/drive/folders/1sXK2pXhHTA0WTdqzlc-IqSHtH5NYMx-_?usp=sharing
 ## MÔ TẢ KIẾN TRÚC
 ![Image Description](https://github.com/sirgecko84/RAG-based-Chatbot-Financial-Insight/blob/master/cimg.PNG)
 
