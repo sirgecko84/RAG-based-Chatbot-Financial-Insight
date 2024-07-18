@@ -26,3 +26,21 @@ Khi người dùng đặt câu hỏi, mô hình sẽ thực hiện chuyển câu
 - Load các file PDF: pypdf
 - Test mô hình: pytest
 
+# Hướng dẫn chạy sản phẩm
+
+## Cài đặt Ollama:
+[Ollama](https://ollama.com)
+
+## Cài đặt các thư viện cần thiết
+```bash
+pip install -r requirements.txt
+```
+## Creaate database
+```bash
+python .\populate_database.py
+```
+## Run Streamlit app
+```bash
+streamlit run app.py
+```
+
