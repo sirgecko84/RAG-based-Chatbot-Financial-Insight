@@ -1,6 +1,0 @@
-pypdf #load pdf
-langchain
-chromadb #vector database
-pytest #unit testing
-boto3
-streamlit #ui
