@@ -3,7 +3,9 @@ from typing import List
 from langchain.prompts import ChatPromptTemplate
 from langchain_aws import ChatBedrock
 from rag_app.get_chroma_db import get_chroma_db
-
+import cohere
+from dotenv import load_dotenv
+import os
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
 
@@ -26,10 +28,19 @@ class QueryResponse:
 
 def query_rag(query_text: str) -> QueryResponse:
     db = get_chroma_db()
+    load_dotenv()
+    co = cohere.Client(os.getenv("COHERE_API_KEY"))
 
     # Search the DB.
-    results = db.similarity_search_with_score(query_text, k=3)
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    results = db.similarity_search_with_score(query_text, k=25)
+    data = [doc.page_content for doc, _score in results]
+    # rerank the result
+    rerank_data = co.rerank(query=query_text, documents=data, top_n=3, model='rerank-english-v3.0')
+    final_results = []
+    for result in rerank_data.results:
+        final_results.append(data[result.index])
+    # add context to prompt
+    context_text = "\n\n---\n\n".join(final_results)
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
     print(prompt)
@@ -47,4 +58,4 @@ def query_rag(query_text: str) -> QueryResponse:
 
 
 if __name__ == "__main__":
-    query_rag("How much does a landing page cost to develop?")
+    query_rag("Tell me about the Culture of Sun* Inc?")
